@@ -2,20 +2,20 @@ name: My First WorkFlow
 
 on: push
 
-job:
+jobs:
   first_job:
     runs_on: ubuntu-latest
     steps:
-    - name: welcome message
-      run: echo "Hello all"
+      - name: welcome message
+        run: echo "Hello all"
 
-    - name: List Files
-      run: ls
+      - name: List Files
+        run: ls
 
-    - name: ReadFile
-      run: cat README.md
+      - name: ReadFile
+        run: cat README.md
 
-    - name: get date
-      run: echo "today is `date`"
-      
+      - name: get date
+        run: echo "today is `date`"
+
 
