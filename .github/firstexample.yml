@@ -15,4 +15,7 @@ job:
     - name: ReadFile
       run: cat README.md
 
+    - name: get date
+      run: echo "today is `date`"
       
+
