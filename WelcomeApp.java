@@ -12,7 +12,11 @@ public class WelcomeApp {
         server.start();
         System.out.println("Server started at http://localhost:8080");
 
-        // Keep the server running for a few seconds
+        // Show response first via curl
+        Thread.sleep(2000);
+        System.out.println("Ready for curl request...");
+
+        // Server stays alive a bit longer
         Thread.sleep(5000);
         server.stop(0);
         System.out.println("Server stopped.");
