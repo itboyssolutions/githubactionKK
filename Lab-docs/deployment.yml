@@ -1,0 +1,40 @@
+name: Multi-Environment Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Java App
+        run: javac Main.java
+
+      - name: Run Java App
+        run: java Main
+
+  # **Step for Manual Approval in Production**
+  approve:
+    if: github.ref_name == 'main'
+    needs: deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Request manual approval
+        uses: hmarr/await-approval-action@v1
+        with:
+          approvers: 'GitHub-username-of-Reviewer' 
+          minimum: 1
